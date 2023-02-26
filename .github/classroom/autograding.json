@@ -1,0 +1,284 @@
+{
+  "tests": [
+    {
+      "name": "FoldTables fold 1",
+      "run": "stack test --ta '--pattern \"FoldTables fold 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables fold 2",
+      "run": "stack test --ta '--pattern \"FoldTables fold 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables tmap 1",
+      "run": "stack test --ta '--pattern \"FoldTables tmap 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables tmap 2",
+      "run": "stack test --ta '--pattern \"FoldTables tmap 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables maxKey 1",
+      "run": "stack test --ta '--pattern \"FoldTables maxKey 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables maxKey 2",
+      "run": "stack test --ta '--pattern \"FoldTables maxKey 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10.0
+    },
+    {
+      "name": "FoldTables mostFrequent 1",
+      "run": "stack test --ta '--pattern \"FoldTables mostFrequent 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "FoldTables mostFrequent 2",
+      "run": "stack test --ta '--pattern \"FoldTables mostFrequent 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10.0
+    },
+    {
+      "name": "Reduce A1",
+      "run": "stack test --ta '--pattern \"Reduce A1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce A2",
+      "run": "stack test --ta '--pattern \"Reduce A2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce A3",
+      "run": "stack test --ta '--pattern \"Reduce A3\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce A4",
+      "run": "stack test --ta '--pattern \"Reduce A4\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce B1",
+      "run": "stack test --ta '--pattern \"Reduce B1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce B2",
+      "run": "stack test --ta '--pattern \"Reduce B2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce B3",
+      "run": "stack test --ta '--pattern \"Reduce B3\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C1",
+      "run": "stack test --ta '--pattern \"Reduce C1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C2",
+      "run": "stack test --ta '--pattern \"Reduce C2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C3",
+      "run": "stack test --ta '--pattern \"Reduce C3\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C4",
+      "run": "stack test --ta '--pattern \"Reduce C4\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C5",
+      "run": "stack test --ta '--pattern \"Reduce C5\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C6",
+      "run": "stack test --ta '--pattern \"Reduce C6\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "Reduce C7",
+      "run": "stack test --ta '--pattern \"Reduce C7\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "noLets 1",
+      "run": "stack test --ta '--pattern \"noLets 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "noLets 2",
+      "run": "stack test --ta '--pattern \"noLets 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "noLets 3",
+      "run": "stack test --ta '--pattern \"noLets 3\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 5.0
+    },
+    {
+      "name": "desugar 1",
+      "run": "stack test --ta '--pattern \"desugar 1\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10.0
+    },
+    {
+      "name": "desugar 2",
+      "run": "stack test --ta '--pattern \"desugar 2\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10.0
+    },
+    {
+      "name": "desugar 3",
+      "run": "stack test --ta '--pattern \"desugar 3\"'",
+      "setup": "",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10.0
+    }
+  ]
+}

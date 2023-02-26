@@ -1,0 +1,59 @@
+name:                midterm2-practice
+version:             0.1.0.0
+synopsis:            Starter code for cse130 midterm2
+license:             MIT
+license-file:        LICENSE
+author:              Michael Borkowski
+maintainer:          mborkows@eng.ucsd.edu
+category:            Language
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+
+Library
+  ghc-options:        -W -threaded
+  exposed-modules:    Language.Nano2.Desugar,
+                      Language.Nano2.FoldTables,
+                      Language.Nano2.Types,
+                      Language.Nano2.Reduce,
+                      Language.Nano2.Parser
+  Default-Extensions: OverloadedStrings
+
+  -- other-extensions:
+  build-depends:       base,
+                       array,
+                       mtl,
+                       containers
+
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  build-tools:         alex, happy
+  other-modules:       Language.Nano2.Lexer
+
+--executable nano
+--  build-depends:       base,
+--                       containers,
+--                       haskeline,
+--                       mtl,
+--                       transformers,
+--                       midterm2-practice
+--  default-language:    Haskell2010
+--  main-is:             bin/Main.hs
+--  Default-Extensions:  OverloadedStrings
+
+test-suite test
+  default-language:    Haskell2010
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      tests
+  other-modules:       Common
+  ghc-options:         -threaded
+  Default-Extensions:  OverloadedStrings
+  main-is:             Test.hs
+  build-depends:       base,
+                       containers,
+                       directory,
+                       filepath,
+                       tasty,
+                       tasty-hunit,
+                       midterm2-practice
