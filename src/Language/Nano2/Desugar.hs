@@ -18,7 +18,17 @@ import Language.Nano2.Parser
 --    and `False` if it does. We'll use it later.
 
 noLets :: Expr -> Bool
-noLets e = error "TBD: noLets implementation"
+-- both of these types do not hold any Exprs
+noLets (ENum _) = True
+noLets (EVar _) = True
+
+-- rather shockingly, an ELet has a Let
+noLets (ELet {}) = False
+
+-- and now, just recurse on all inner exprs
+noLets (EBin _ e1 e2) = noLets e1 && noLets e2
+noLets (EApp e1 e2) = noLets e1 && noLets e2
+noLets (ELam _ e) = noLets e
 
 -- Test Cases
 --
@@ -46,7 +56,24 @@ noLets e = error "TBD: noLets implementation"
 --    returns True`.
 
 desugar :: Expr -> Expr
-desugar e = error "TBD: desugar implementation"
+-- if there are no lets, just return e
+desugar e | noLets e = e
+
+-- let x = e1 in e2 => (\x -> e2) e1
+-- do a lambda step, x becomes e1 inside of e2 :)
+desugar (ELet x e1 e2) = EApp (ELam x e2) e1
+
+-- desugar internal Exprs.
+-- i wish we could implement Functor on Expr.
+-- technically inefficient, if only one of the two need desugaring
+-- i'm wasting a function call. however, I don't care.
+desugar (EBin op e1 e2) = EBin op (desugar e1) (desugar e2)
+desugar (EApp e1 e2) = EApp (desugar e1) (desugar e2)
+desugar (ELam x e1) = ELam x (desugar e1)
+
+-- make compiler happy, even though this will be caught in the first case
+desugar e@(ENum _) = e
+desugar e@(EVar _) = e
 
 -- Test Cases:
 -- We can't give you any interesting outputs directly because that
