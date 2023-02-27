@@ -23,7 +23,7 @@ noLets (ENum _) = True
 noLets (EVar _) = True
 
 -- rather shockingly, an ELet has a Let
-noLets (ELet {}) = False
+noLets (ELet _ _ _) = False
 
 -- and now, just recurse on all inner exprs
 noLets (EBin _ e1 e2) = noLets e1 && noLets e2
@@ -56,24 +56,23 @@ noLets (ELam _ e) = noLets e
 --    returns True`.
 
 desugar :: Expr -> Expr
--- if there are no lets, just return e
-desugar e | noLets e = e
-
 -- let x = e1 in e2 => (\x -> e2) e1
--- do a lambda step, x becomes e1 inside of e2 :)
+-- do a lambda step, free instances of x becomes e1 inside of e2 :)
 desugar (ELet x e1 e2) = EApp (ELam x (desugar e2)) (desugar e1)
 
 -- desugar internal Exprs.
--- i wish we could implement Functor on Expr.
--- technically inefficient, if only one of the two need desugaring
--- i'm wasting a function call. however, I don't care.
 desugar (EBin op e1 e2) = EBin op (desugar e1) (desugar e2)
 desugar (EApp e1 e2) = EApp (desugar e1) (desugar e2)
 desugar (ELam x e1) = ELam x (desugar e1)
 
--- make compiler happy, even though this will be caught in the first case
-desugar e@(ENum _) = e
-desugar e@(EVar _) = e
+-- No internal exprs, just return itself.
+desugar (ENum n) = ENum n
+desugar (EVar v) = EVar v
+
+-- You can also use a line like "desugar e | noLets e = e" in the beginning to
+-- be more efficient by terminating desugaring early and handle the ENum/EVar
+-- case, but you'll get compiler warnings since you haven't proven that you've
+-- handled every case.
 
 -- Test Cases:
 -- We can't give you any interesting outputs directly because that
