@@ -38,9 +38,9 @@ t0 = Bind "aardvark" 100 (Bind "boa" 20 (Bind "cat" 30 Emp))
 -- key and the value.
 
 fold :: (Key -> a -> b -> b) -> b -> Table a -> b
--- nothing to fold over, return our base case
+-- Table is Emp, there's nothing to fold over, return our base case
 fold _ b Emp = b
--- perform our folding operation on our current key, value pair
+-- perform our folding operation (op) on our current key value pair
 -- and the result of folding on the rest of the elements (our acc)
 fold op b (Bind k v t) = op k v (fold op b t)
 
@@ -58,9 +58,10 @@ fold op b (Bind k v t) = op k v (fold op b t)
 tmap :: (Key -> a -> b) -> Table a -> Table b
 tmap f t = fold op base t
   where
-    -- bind our key to our new value, combine it with the
-    -- rest of the new elements
+    -- bind our key to our new value after applying f,
+    -- combine it with the rest of the new elements
     op key value newTable = Bind key (f key value) newTable
+
     -- we're building a new table, so start from Emp
     base = Emp
 
@@ -128,7 +129,7 @@ mostFrequent xs = post (foldr op base xs)
       where
         hasKey (Bind k _ t) key
           | k == key = True
-          | otherwise = t `hasKey` key  -- check the rest of the entries
+          | otherwise = t `hasKey` key -- check the rest of the entries
         hasKey Emp _ = False
 
         -- if we encounter the word, bump the count up by 1
