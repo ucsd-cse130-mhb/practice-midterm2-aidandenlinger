@@ -61,7 +61,7 @@ desugar e | noLets e = e
 
 -- let x = e1 in e2 => (\x -> e2) e1
 -- do a lambda step, x becomes e1 inside of e2 :)
-desugar (ELet x e1 e2) = EApp (ELam x e2) e1
+desugar (ELet x e1 e2) = EApp (ELam x (desugar e2)) (desugar e1)
 
 -- desugar internal Exprs.
 -- i wish we could implement Functor on Expr.
