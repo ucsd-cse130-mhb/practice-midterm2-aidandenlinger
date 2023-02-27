@@ -166,7 +166,7 @@ reduce1 (EApp (ELam x e1) e2)
   | isValue e2 = Just (subst x e2 e1)
   | otherwise = case reduce1 e2 of
     -- App-R: v e => v e', try to reduce e2
-    Just e2' -> Just (EApp e1 e2')
+    Just e2' -> Just (EApp (ELam x e1) e2')
     Nothing -> Nothing
 
 reduce1 (EApp e1 e2) = case reduce1 e1 of
