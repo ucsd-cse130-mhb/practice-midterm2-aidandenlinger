@@ -161,18 +161,19 @@ reduce1 (ELet x e1 e2)
     Just e1' -> Just (ELet x e1' e2)
     Nothing -> Nothing
 
+-- App: (\x -> e) v => e[x := v]
 reduce1 (EApp (ELam x e1) e2)
-  -- App: (\x -> e) v => e[x := v]
   | isValue e2 = Just (subst x e2 e1)
-  | otherwise = case reduce1 e2 of
-    -- App-R: v e => v e', try to reduce e2
-    Just e2' -> Just (EApp (ELam x e1) e2')
-    Nothing -> Nothing
 
-reduce1 (EApp e1 e2) = case reduce1 e1 of
+reduce1 (EApp e1 e2)
+  -- App-R: v e => v e', try to reduce e2
+  | isValue e1 =  case reduce1 e2 of
+    Just e2' -> Just (EApp e1 e2')
+    Nothing -> Nothing
   -- App-L: e1 e2 => e1' e2
-  Just e1' -> Just (EApp e1' e2)
-  Nothing -> Nothing
+  | otherwise = case reduce1 e1 of
+    Just e1' -> Just (EApp e1' e2)
+    Nothing -> Nothing
 
 
 -- Here are some test cases!
