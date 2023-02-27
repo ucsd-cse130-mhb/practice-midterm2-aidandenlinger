@@ -65,12 +65,12 @@ isValue _ = False
 --   Implement this function (following the lecture notes)
 
 subst :: Id -> Expr -> Expr -> Expr
--- following the lecture slide 4 from Wednesday's slides
-subst x v y@(EVar var)
+-- following lecture 16, slide 18
+subst x v (EVar var)
   | var == x = v -- x[x := v] = v
-  | otherwise = y -- y[x := v] = y when x /= y
+  | otherwise = EVar var -- y[x := v] = y when x /= y
 
-subst _ _ n@(ENum _) = n -- n[x := v] = n
+subst _ _ (ENum n) = ENum n -- n[x := v] = n
 
 -- (e1 + e2)[x := v] = e1[x := v] + e2[x := v]
 subst x v (EBin op e1 e2) = EBin op (subst x v e1) (subst x v e2)
@@ -82,10 +82,10 @@ subst x v (ELet var def stmt)
   -- when x /= y
   | otherwise = ELet var (subst x v def) (subst x v stmt)
 
--- couldn't find specific lecture slides to reference for EApp/ELam
 -- for ELam - replace the free variables in body
-subst x v lam@(ELam var body)
-  | x == var = lam -- (\x -> e)[x := v] => \x -> e, x is not free in e
+subst x v (ELam var body)
+  | x == var = ELam var body -- (\x -> e)[x := v] => \x -> e, x is not free in e
+                             -- because ELam provides the binding for x!
   | otherwise = ELam var (subst x v body) -- (\y -> e)[x := v] => \y -> e[x := v]
 
 -- for EApp, just recurse inwards, no IDs to check
@@ -129,7 +129,6 @@ subst s v (EApp func arg) = EApp (subst s v func) (subst s v arg)
 --   Don't worry about recursive function definitions.
 
 reduce1 :: Expr -> Maybe Expr
--- this is a reimplementation of isValue, but it makes the compiler happy
 reduce1 (ENum _) = Nothing -- already a value
 reduce1 (ELam _ _) = Nothing -- already a value
 
