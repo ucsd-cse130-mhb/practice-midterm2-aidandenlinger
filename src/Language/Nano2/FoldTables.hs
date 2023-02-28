@@ -40,8 +40,14 @@ t0 = Bind "aardvark" 100 (Bind "boa" 20 (Bind "cat" 30 Emp))
 -- key and the value.
 
 fold :: (Key -> a -> b -> b) -> b -> Table a -> b
-fold op b Emp          = error "TBD: fold empty"
-fold op b (Bind k v t) = error "TBD: fold bind"
+fold op b Emp          = b  -- empty table, nothing to fold over, return base acc 
+--                          curr    acc on
+--                          elem  remaining elems
+fold op b (Bind k v t) = op k v (fold op b t)
+
+-- fold op b (Bind "a" 1 (Bind "b" 2 Emp)) => op "a" 1 (op "b" 1 b)
+
+-- foldr [1,2,3] => f 1 (f 2 (f 3 b))
 
 -- When you are done, you should see the following behavior
 
@@ -57,8 +63,13 @@ fold op b (Bind k v t) = error "TBD: fold bind"
 tmap :: (Key -> a -> b) -> Table a -> Table b
 tmap f t   = fold op base t
   where
-      op   = error "TBD: tmap op"
-      base = error "TBD: tmap base"
+      -- for each element in table,
+      -- bind key and mapped value to the accumulator
+      -- will build new Table by the end
+      op key value acc = Bind key (f key value) acc
+
+      -- has to be Table b, because that's what tmap needs to return
+      base = Emp
 
 -- Note: You can add arguments to op or base.
 
@@ -83,9 +94,18 @@ tmap f t   = fold op base t
 maxKey :: (Ord a) => Table a -> Maybe Key
 maxKey t   = post (fold op base t)
   where
-      post = error "TBD: maxKey post"
-      op   = error "TBD: maxKey op"
-      base = error "TBD: maxKey base"
+      -- just return the key
+      post (Just (key, _)) = Just key
+      post Nothing = Nothing
+
+      op key value (Just (maxKey, maxValue))
+          | value > maxValue = Just (key, value) -- key, value is the new largest
+          | otherwise = Just (maxKey, maxValue) -- wasn't largest
+      op key value Nothing = Just (key, value) -- largest seen so far
+            
+      -- we need to return Nothing when table is empty,
+      -- so base case should be nothing
+      base = Nothing
 
 -- When you are done you should see the following
 
